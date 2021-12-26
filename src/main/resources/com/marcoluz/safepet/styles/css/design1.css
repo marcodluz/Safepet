@@ -1,0 +1,135 @@
+.signup-feature {
+    -fx-background-image: url("../img/feature-1.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+    -fx-background-size: cover;
+    -fx-background-size: 100%;
+}
+
+.signup-success-feature {
+    -fx-background-image: url("../img/feature-2.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+    -fx-background-size: cover;
+    -fx-background-size: 100%;
+}
+
+.login-feature {
+    -fx-background-image: url("../img/feature-3.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+    -fx-background-size: cover;
+    -fx-background-size: 100%;
+}
+
+.button {
+    -fx-background-color: #fff;
+}
+
+.button:focused {
+    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+}
+
+.nav-bar-dashboard {
+    -fx-background-color: #4F4789;
+}
+
+.nav-bar-dashboard:hover {
+    -fx-background-color: #3f396e;
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-stroke: transparent;
+    -fx-size:50;
+    -fx-alignment: CENTER ;
+    -fx-text-alignment: center;
+
+}
+.table-row-cell:filled:hover {
+
+    -fx-size:50;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+
+}
+.table-view:row-selection {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-fixed-cell-size: 50;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+}
+
+.table-view .table-column{
+    -fx-text-alignment: center;
+    -fx-alignment: CENTER
+
+}
+
+
+
+
+
+/* Main Border Pane */
+.content-body {
+    -fx-background-color: #fff;
+}
+/*------------------*/
+
+.background-middle {
+    -fx-background-color: #f5f5f5;
+}
+
+.content-middle {
+    -fx-background-radius: 15px 0 0 0;
+    -fx-background-color: #fff;
+}
+
+.side-bar-button {
+    -fx-background-color: transparent;
+    -fx-padding: 10px 5px 10px 0;
+    -fx-text-fill: #b4b4b4;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-alignment: left;
+    -fx-background-radius: 10px;
+}
+
+.side-bar-button:focused {
+    -fx-background-color: #fff6e0;
+    -fx-padding: 10px 5px 10px 0;
+    -fx-text-fill: #ffc02b;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-alignment: left;
+    -fx-background-radius: 10px;
+}
+
+.avatar-button {
+    -fx-min-width: 35px;
+    -fx-min-height: 35px;
+    -fx-background-color: #fff;
+    -fx-background-radius: 100%;
+}
+
+.avatar-image {
+    -fx-background-image: url("../img/avatar-default.png");
+    -fx-background-size: 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-border-width: 1px;
+    -fx-border-color: #c1c1c1;
+}
+
+.button-orange {
+    -fx-background-color: #FA8334;
+}
+

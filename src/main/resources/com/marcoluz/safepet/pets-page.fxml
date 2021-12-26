@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="middleRootPane" prefHeight="720.0" prefWidth="846.0" stylesheets="@styles/css/design1.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marcoluz.safepet.controller.MyPetsController">
+    <children>
+      <VBox prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+              <Label prefWidth="880.0" text="My Pets">
+                  <font>
+                      <Font name="System Bold" size="25.0" />
+                  </font>
+              </Label>
+            <TableView fx:id="tblview" prefWidth="880.0">
+              <columns>
+                  <TableColumn fx:id="clm_name" prefWidth="170.0" text="NAME" />
+                  <TableColumn fx:id="clm_specie" prefWidth="140.0" text="SPECIE" />
+                  <TableColumn fx:id="clm_coat_colour" prefWidth="130.0" text="COAT COLOUR" />
+                  <TableColumn fx:id="clm_dob" prefWidth="125.0" text="DATE OF BIRTH" />
+                  <TableColumn fx:id="clm_notes" prefWidth="239.0" text="NOTES" />
+              </columns>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </TableView>
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" styleClass="button-orange" text="Add New Pet" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></Button>
+                  <Button mnemonicParsing="false" onAction="#deleteSelectedPet" styleClass="button-orange" text="Delete Pet(s)" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+                     </padding>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+    </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</AnchorPane>

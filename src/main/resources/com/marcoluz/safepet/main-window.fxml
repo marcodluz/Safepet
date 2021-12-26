@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane fx:id="rootPane" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.marcoluz.safepet.controller.StartController"
+            prefHeight="720.0" prefWidth="1080.0" stylesheets="@styles/css/design1.css">
+<children>
+    <BorderPane prefHeight="720.0" prefWidth="1080.0">
+    </BorderPane>
+</children>
+</AnchorPane>
+

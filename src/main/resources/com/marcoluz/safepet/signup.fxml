@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="720.0" maxWidth="1080.0" prefHeight="720.0" prefWidth="1080.0" stylesheets="@styles/css/design1.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marcoluz.safepet.controller.MainController">
+   <children>
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <right>
+            <VBox alignment="CENTER" maxHeight="720.0" maxWidth="540.0" minHeight="720.0" minWidth="540.0" prefHeight="720.0" prefWidth="540.0" style="-fx-background-color: #f8f8f8;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="23.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@styles/img/logo.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <HBox maxHeight="50.0" maxWidth="400.0" minHeight="50.0" minWidth="400.0" prefHeight="50.0" prefWidth="400.0">
+                     <children>
+                        <TextField fx:id="customer_firstname" maxHeight="50.0" maxWidth="400.0" prefHeight="50.0" prefWidth="198.0" style="-fx-background-color: #fff; -fx-border-color: #e8e8e8; -fx-border-radius: 5px;" text="">
+                           <padding>
+                              <Insets left="10.0" top="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="customer_lastname" maxHeight="50.0" maxWidth="400.0" prefHeight="50.0" prefWidth="198.0" style="-fx-background-color: #fff; -fx-border-color: #e8e8e8; -fx-border-radius: 5px;" text="">
+                           <padding>
+                              <Insets left="10.0" top="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="4.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <Label text="First name" textFill="SILVER" translateX="-160.0" translateY="-45.0" />
+                  <Label text="Last name" textFill="SILVER" translateX="42.0" translateY="-62.0">
+                     <VBox.margin>
+                        <Insets bottom="-18.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="customer_email" maxHeight="50.0" maxWidth="400.0" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #fff; -fx-border-color: #e8e8e8; -fx-border-radius: 5px;" text="">
+                     <padding>
+                        <Insets left="10.0" top="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Email" textFill="SILVER" translateX="-174.0" translateY="-45.0" />
+                  <PasswordField fx:id="customer_password" maxHeight="50.0" maxWidth="400.0" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #fff; -fx-border-color: #e8e8e8; -fx-border-radius: 5px;" text="">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" top="10.0" />
+                     </padding>
+                  </PasswordField>
+                  <Label text="Password" textFill="SILVER" translateX="-161.0" translateY="-45.0" />
+                  <Button maxHeight="45.0" maxWidth="400.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="45.0" prefWidth="400.0" style="-fx-background-color: #FA8334;" text="Create Account" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
+                  <HBox maxHeight="10.0" maxWidth="400.0" minHeight="10.0" minWidth="400.0" prefHeight="10.0" prefWidth="400.0" translateX="12.0" translateY="-195.0">
+                     <children>
+                        <Label fx:id="firstNameError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="401.0" textFill="RED" text="">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lastNameError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="401.0" textFill="RED" text="">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="emailError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="401.0" textFill="RED" translateX="12.0" translateY="-139.0" text="">
+                     <font>
+                        <Font size="10.0" />
+                     </font></Label>
+                  <Label fx:id="passwordError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="401.0" textFill="RED" translateX="12.0" translateY="-89.0" text="">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Button maxHeight="45.0" maxWidth="400.0" mnemonicParsing="false" onAction="#goToLogin" prefHeight="45.0" prefWidth="400.0" style="-fx-background-color: #fff; -fx-border-color: #e8e8e8;" text="Go to Login" textFill="#fa8334" translateY="-35.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </right>
+         <left>
+            <Pane maxHeight="720.0" maxWidth="540.0" minHeight="720.0" minWidth="540.0" prefHeight="200.0" prefWidth="540.0" styleClass="signup-feature" BorderPane.alignment="CENTER" />
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>
