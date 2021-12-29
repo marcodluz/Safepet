@@ -5,6 +5,7 @@ import com.marcoluz.safepet.dao.AccountDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,8 +15,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainController{
+public class MainController {
     @FXML
     private TextField customer_firstname;
     @FXML
@@ -50,6 +53,8 @@ public class MainController{
     private Button btnAccount;
     @FXML
     private StackPane contentArea;
+    @FXML
+    private Label welcomeMessage;
 
 
     public static int id;
@@ -154,6 +159,10 @@ public class MainController{
 
     public void setCustomerInfo() {
         customerFirstName.setText(firstName);
+    }
+
+    public void setWelcomeMessage() {
+        welcomeMessage.setText(welcomeMessage.getText() + " " + firstName +"!");
     }
 }
 
