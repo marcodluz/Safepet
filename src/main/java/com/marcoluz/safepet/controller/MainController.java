@@ -55,6 +55,8 @@ public class MainController {
     private StackPane contentArea;
     @FXML
     private Label welcomeMessage;
+    @FXML
+    private Button btnAddPet;
 
 
     public static int id;
@@ -147,6 +149,10 @@ public class MainController {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/login.fxml"));
             rootPane.getChildren().setAll(pane);
             System.out.println("Logout Successful!");
+        }
+        else if(event.getSource() == btnAddPet) {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/add-pet-page.fxml"));
+            middleRootPane.getChildren().setAll(pane);
         }
     }
 

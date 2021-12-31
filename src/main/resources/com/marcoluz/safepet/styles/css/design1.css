@@ -133,3 +133,33 @@
     -fx-background-color: #FA8334;
 }
 
+.text-area {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+    -fx-border-color: #c5c5c5;
+    -fx-border-radius: 3px;
+}
+
+.text-area .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area:focused .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #7ecfff;
+}
+
+.text-area .content {
+    -fx-padding: 10px;
+    -fx-text-fill: gray;
+    -fx-highlight-fill: #7ecfff;
+}
+
+.date-picker {
+    -fx-background-color: white, transparent, white, transparent;
+    -fx-border-color: #c5c5c5;
+    -fx-border-radius: 3px;
+}

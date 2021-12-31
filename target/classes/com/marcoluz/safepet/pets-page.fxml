@@ -33,7 +33,7 @@
             </TableView>
             <HBox>
                <children>
-                  <Button mnemonicParsing="false" styleClass="button-orange" text="Add New Pet" textFill="WHITE">
+                  <Button fx:id="btnAddPet" mnemonicParsing="false" onAction="#goToAddPet" styleClass="button-orange" text="Add New Pet" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
                      </padding>

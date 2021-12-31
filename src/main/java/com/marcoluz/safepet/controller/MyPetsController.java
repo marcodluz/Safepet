@@ -7,12 +7,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,6 +42,10 @@ public class MyPetsController implements Initializable {
     private TableColumn<Pet,String> clm_dob;
     @FXML
     private TableColumn<Pet,String> clm_notes;
+    @FXML
+    private AnchorPane middleRootPane;
+    @FXML
+    private Button btnAddPet;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -99,6 +112,12 @@ public class MyPetsController implements Initializable {
                 System.err.println(ex.getMessage());
             }
         }
+    }
+
+    @FXML
+    private void goToAddPet(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/add-pet-page.fxml"));
+        middleRootPane.getChildren().setAll(pane);
     }
 }
 
