@@ -1,8 +1,8 @@
 package com.marcoluz.safepet;
 
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+
+import java.util.Date;
 
 public class DataValidation {
 
@@ -11,6 +11,34 @@ public class DataValidation {
         String validationString = null;
 
         if(inputTextField.getText().isEmpty()) {
+            isNull = true;
+            validationString = validationText;
+        }
+
+        inputLabel.setText(validationString);
+        return isNull;
+
+    }
+
+    public static boolean datePickerNull(DatePicker inputDatePicker, Label inputLabel, String validationText) {
+        boolean isNull = false;
+        String validationString = null;
+
+        if(inputDatePicker.getValue() == null) {
+            isNull = true;
+            validationString = validationText;
+        }
+
+        inputLabel.setText(validationString);
+        return isNull;
+
+    }
+
+    public static boolean comboBoxNull(ComboBox inputComboBox, Label inputLabel, String validationText) {
+        boolean isNull = false;
+        String validationString = null;
+
+        if(inputComboBox.getValue() == null) {
             isNull = true;
             validationString = validationText;
         }

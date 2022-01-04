@@ -130,7 +130,25 @@
 }
 
 .button-orange {
-    -fx-background-color: #FA8334;
+    -fx-background-color: #F0932B;
+}
+
+.button-red {
+    -fx-background-color: #EB4D4B;
+}
+
+.button-yellow {
+    -fx-background-color: #F9CA24;
+}
+
+.button-green {
+    -fx-background-color: #6AB04C;
+}
+
+.welcome-image {
+    -fx-background-image: url("../img/welcome-1.png");
+    -fx-background-size: 100%;
+    -fx-background-radius: 10;
 }
 
 .text-area {
@@ -159,6 +177,12 @@
 }
 
 .date-picker {
+    -fx-background-color: white, transparent, white, transparent;
+    -fx-border-color: #c5c5c5;
+    -fx-border-radius: 3px;
+}
+
+.combo-box {
     -fx-background-color: white, transparent, white, transparent;
     -fx-border-color: #c5c5c5;
     -fx-border-radius: 3px;

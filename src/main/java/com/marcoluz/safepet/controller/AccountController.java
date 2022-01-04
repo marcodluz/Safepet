@@ -2,6 +2,7 @@ package com.marcoluz.safepet.controller;
 
 import com.marcoluz.safepet.DataValidation;
 import com.marcoluz.safepet.dao.AccountDAO;
+import com.marcoluz.safepet.util.DBUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -73,8 +74,8 @@ public class AccountController implements Initializable {
                 mydata[3] = this.accountNewPassword.getText();
             }
 
-            String insertsql = "UPDATE account SET first_name = ?, last_name = ?, email = ?, password = ? WHERE (email = '"+ MainController.email +"');";
-            AccountDAO.insertAccountDetails(insertsql, mydata);
+            String updateSQL = "UPDATE account SET first_name ='"+ mydata[0] +"', last_name = '"+ mydata[1] +"', email = '"+ mydata[2] +"', password = '"+ mydata[3] +"' WHERE (email = '"+ MainController.email +"');";
+            DBUtil.sqlUpdate(updateSQL);
 
             MainController.firstName = this.accountFirstName.getText();
             MainController.lastName = this.accountLastName.getText();

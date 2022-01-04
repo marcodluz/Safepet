@@ -103,18 +103,20 @@
                       <children>
                           <StackPane fx:id="contentArea" prefHeight="660.0" prefWidth="860.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <children>
-                           <VBox maxWidth="600.0" prefHeight="200.0" prefWidth="100.0">
+                           <Pane maxHeight="472.0" maxWidth="680.0" minHeight="472.0" minWidth="680.0" prefHeight="472.0" prefWidth="680.0" styleClass="welcome-image">
                               <children>
-                                 <Label fx:id="welcomeMessage" alignment="CENTER" prefHeight="50.0" prefWidth="600.0" text="Welcome!">
-                                    <font>
-                                       <Font size="40.0" />
-                                    </font>
-                                 </Label>
+                                 <VBox alignment="CENTER" prefHeight="473.0" prefWidth="681.0">
+                                    <children>
+                                       <Label fx:id="welcomeMessage" alignment="CENTER" text="Welcome to SafePet" textFill="WHITE">
+                                          <font>
+                                             <Font size="40.0" />
+                                          </font>
+                                       </Label>
+                                       <Label text="Created by Marco Luz" textFill="WHITE" />
+                                    </children>
+                                 </VBox>
                               </children>
-                              <padding>
-                                 <Insets top="325.0" />
-                              </padding>
-                           </VBox>
+                           </Pane>
                         </children></StackPane>
                       </children>
                   </AnchorPane>

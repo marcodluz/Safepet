@@ -1,25 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="middleRootPane" prefHeight="720.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marcoluz.safepet.controller.MainController">
+<AnchorPane fx:id="middleRootPane" prefHeight="720.0" prefWidth="846.0" stylesheets="@styles/css/design1.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marcoluz.safepet.controller.AppointmentsController">
     <children>
-        <Label layoutX="229.0" layoutY="218.0" prefHeight="54.0" prefWidth="880.0" text="Appointments" AnchorPane.bottomAnchor="666.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <font>
-                <Font name="System Bold" size="25.0" />
-            </font>
-        </Label>
-      <TableView layoutY="54.0" prefHeight="430.0" prefWidth="880.0" AnchorPane.bottomAnchor="236.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
+      <VBox prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+              <Label prefWidth="880.0" text="Appointments">
+                  <font>
+                      <Font name="System Bold" size="25.0" />
+                  </font>
+              </Label>
+            <TableView fx:id="tblview" prefWidth="880.0">
+              <columns>
+                  <TableColumn fx:id="clm_pet_id" prefWidth="100.0" text="PET ID" />
+                  <TableColumn fx:id="clm_type" prefWidth="220.0" text="TYPE" />
+                  <TableColumn fx:id="clm_status" prefWidth="242.0" text="STATUS" />
+                  <TableColumn fx:id="clm_date" prefWidth="242.0" text="DATE" />
+              </columns>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </TableView>
+            <HBox>
+               <children>
+                  <Button fx:id="btnAddPet" mnemonicParsing="false" onAction="#goToAddAppointment" styleClass="button-green" text="Add Appointment" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="btnEditPet" mnemonicParsing="false" styleClass="button-yellow" text="Edit" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnDelPet" mnemonicParsing="false" onAction="#deleteSelectedAppointment" styleClass="button-red" text="Delete" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+                     </padding>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
     </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

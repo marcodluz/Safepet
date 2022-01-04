@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="middleRootPane" prefHeight="720.0" prefWidth="880.0" stylesheets="@styles/css/design1.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marcoluz.safepet.controller.AddPetController">
+<AnchorPane fx:id="middleRootPane" prefHeight="720.0" prefWidth="880.0" stylesheets="@styles/css/design1.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marcoluz.safepet.controller.EditPetController">
     <children>
       <VBox minWidth="880.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-              <Label prefWidth="200.0" text="Add New Pet">
+              <Label prefWidth="200.0" text="Edit Pet">
                   <font>
                       <Font name="System Bold" size="25.0" />
                   </font>
@@ -158,7 +158,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Button maxHeight="45.0" maxWidth="404.0" minHeight="45.0" minWidth="404.0" mnemonicParsing="false" onAction="#createPet" prefHeight="45.0" prefWidth="404.0" styleClass="button-green" text="Add Pet" textFill="WHITE">
+            <Button maxHeight="45.0" maxWidth="404.0" minHeight="45.0" minWidth="404.0" mnemonicParsing="false" onAction="#updatePet" prefHeight="45.0" prefWidth="404.0" styleClass="button-yellow" text="Update Pet" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>

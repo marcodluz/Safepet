@@ -1,5 +1,7 @@
 package com.marcoluz.safepet.model;
 
+import java.time.LocalDate;
+
 public class Pet {
     private int id;
     private int account_id;
@@ -45,6 +47,11 @@ public class Pet {
 
     public String getNotes() {
         return notes;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
 }

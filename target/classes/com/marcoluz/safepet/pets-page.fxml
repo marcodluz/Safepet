@@ -21,11 +21,12 @@
               </Label>
             <TableView fx:id="tblview" prefWidth="880.0">
               <columns>
-                  <TableColumn fx:id="clm_name" prefWidth="170.0" text="NAME" />
+                  <TableColumn fx:id="clm_id" prefWidth="40.0" text="ID" />
+                  <TableColumn fx:id="clm_name" prefWidth="145.0" text="NAME" />
                   <TableColumn fx:id="clm_specie" prefWidth="140.0" text="SPECIE" />
-                  <TableColumn fx:id="clm_coat_colour" prefWidth="130.0" text="COAT COLOUR" />
-                  <TableColumn fx:id="clm_dob" prefWidth="125.0" text="DATE OF BIRTH" />
-                  <TableColumn fx:id="clm_notes" prefWidth="239.0" text="NOTES" />
+                  <TableColumn fx:id="clm_coat_colour" prefWidth="143.0" text="COAT COLOUR" />
+                  <TableColumn fx:id="clm_dob" minWidth="0.0" prefWidth="142.0" text="DATE OF BIRTH" />
+                  <TableColumn fx:id="clm_notes" maxWidth="347.0" prefWidth="194.0" text="NOTES" />
               </columns>
                <VBox.margin>
                   <Insets top="15.0" />
@@ -33,14 +34,22 @@
             </TableView>
             <HBox>
                <children>
-                  <Button fx:id="btnAddPet" mnemonicParsing="false" onAction="#goToAddPet" styleClass="button-orange" text="Add New Pet" textFill="WHITE">
+                  <Button fx:id="btnAddPet" mnemonicParsing="false" onAction="#goToAddPet" styleClass="button-green" text="Add New Pet" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
                      </padding>
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin></Button>
-                  <Button mnemonicParsing="false" onAction="#deleteSelectedPet" styleClass="button-orange" text="Delete Pet(s)" textFill="WHITE">
+                  <Button fx:id="btnEditPet" mnemonicParsing="false" onAction="#goToEditPet" styleClass="button-yellow" text="Edit Pet" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnDelPet" mnemonicParsing="false" onAction="#deleteSelectedPet" styleClass="button-red" text="Delete Pet" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
                      </padding>

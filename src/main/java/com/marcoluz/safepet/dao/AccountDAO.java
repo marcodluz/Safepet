@@ -15,7 +15,7 @@ public class AccountDAO {
     public static void insertAccountDetails(String pStatement, String[] values){
         try{
             PreparedStatement prepStat = DBUtil.db.prepareStatement(pStatement);
-            prepStat.setInt(1, generateCustomerId());
+            prepStat.setInt(1, generateAccountId());
             prepStat.setString(2,values[0]);
             prepStat.setString(3,values[1]);
             prepStat.setString(4,values[2]);
@@ -90,22 +90,8 @@ public class AccountDAO {
         return false;
     }
 
-    public static int generateCustomerId() {
-        String SQL = "SELECT count(*) AS total FROM account";
-
-        try (Connection conn = DBUtil.connect();
-             PreparedStatement preStat = conn.prepareStatement(SQL))
-        {
-            ResultSet result = preStat.executeQuery();
-            result.next();
-
-            return (result.getInt("total") + 1);
-
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            return -1;
-        }
+    public static int generateAccountId() {
+        return DBUtil.getNewId("account");
     }
 
     public static int getId(String email, String password) {

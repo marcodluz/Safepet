@@ -3,6 +3,7 @@ package com.marcoluz.safepet.controller;
 import com.marcoluz.safepet.model.Pet;
 import com.marcoluz.safepet.util.DBUtil;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,10 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -27,11 +25,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MyPetsController implements Initializable {
     @FXML
     private TableView<Pet> tblview;
+    @FXML
+    private TableColumn<Pet,Integer> clm_id;
     @FXML
     private TableColumn<Pet,String> clm_name;
     @FXML
@@ -45,7 +47,16 @@ public class MyPetsController implements Initializable {
     @FXML
     private AnchorPane middleRootPane;
     @FXML
-    private Button btnAddPet;
+    private Button btnDelPet;
+    @FXML
+    private Button btnEditPet;
+
+    public static int selectedPetId;
+    public static String selectedPetName;
+    public static String selectedPetSpecie;
+    public static String selectedPetCoatColour;
+    public static LocalDate selectedPetDob;
+    public static String selectedPetNotes;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,11 +65,14 @@ public class MyPetsController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        btnEditPet.disableProperty().bind(Bindings.isEmpty(tblview.getSelectionModel().getSelectedItems()));
+        btnDelPet.disableProperty().bind(Bindings.isEmpty(tblview.getSelectionModel().getSelectedItems()));
     }
 
     public ObservableList<Pet> getPetList() throws SQLException {
         ObservableList<Pet> petObservableList = FXCollections.observableArrayList();
-        String myQuery = "SELECT * FROM pet WHERE account_id =" + MainController.id;
+        String myQuery = "SELECT * FROM pet WHERE account_id =" + MainController.id + " ORDER BY id DESC";
 
         ResultSet rs= DBUtil.sqlExecute(myQuery);
         Pet pet;
@@ -72,6 +86,7 @@ public class MyPetsController implements Initializable {
 
     public void listPets() throws SQLException {
         ObservableList<Pet> list = getPetList();
+        clm_id.setCellValueFactory(new PropertyValueFactory<Pet,Integer>("id"));
         clm_name.setCellValueFactory(new PropertyValueFactory<Pet,String>("name"));
         clm_specie.setCellValueFactory(new PropertyValueFactory<Pet,String>("specie"));
         clm_coat_colour.setCellValueFactory(new PropertyValueFactory<Pet,String>("coat_colour"));
@@ -80,36 +95,48 @@ public class MyPetsController implements Initializable {
         tblview.setItems(list);
 
         // Allow the selection of multiple rows in the table
-        tblview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        //tblview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     public void deleteSelectedPet(ActionEvent event) {
-        ObservableList<Pet> selectedRow, allPeople;
-        allPeople = tblview.getItems();
+        ObservableList<Pet> selectedRow, allPets;
+        allPets = tblview.getItems();
 
         // Get the rows that are selected
         selectedRow = tblview.getSelectionModel().getSelectedItems();
 
-        // Loop over selected rows and remove the objects
-        for(Pet pet: selectedRow) {
-            // Variables
-            String SQL = "DELETE FROM pet WHERE id = ?";
-            int id = pet.getId();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
-            try (Connection conn = DBUtil.connect();
-                 PreparedStatement prepareStatement = conn.prepareStatement(SQL)){
+        alert.setContentText("This action is permanent!");
+        alert.setTitle("Delete Pet");
+        alert.setHeaderText("Are you sure you want to delete?");
 
-                // Define the PET id to the respective row
-                prepareStatement.setInt(1, id);
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-                // Execute the delete statement
-                prepareStatement.executeUpdate();
+        Optional<ButtonType> result = alert.showAndWait();
 
-                // Remove row from the table view
-                Platform.runLater(() -> allPeople.remove(pet));
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Loop over selected rows and remove the objects
+            for(Pet pet: selectedRow) {
+                // Variables
+                String SQL = "DELETE FROM pet WHERE id = ?";
+                int id = pet.getId();
 
-            } catch (SQLException ex) {
-                System.err.println(ex.getMessage());
+                try (Connection conn = DBUtil.connect();
+                     PreparedStatement prepareStatement = conn.prepareStatement(SQL)){
+
+                    // Define the PET id to the respective row
+                    prepareStatement.setInt(1, id);
+
+                    // Execute the delete statement
+                    prepareStatement.executeUpdate();
+
+                    // Remove row from the table view
+                    Platform.runLater(() -> allPets.remove(pet));
+
+                } catch (SQLException ex) {
+                    System.err.println(ex.getMessage());
+                }
             }
         }
     }
@@ -117,6 +144,27 @@ public class MyPetsController implements Initializable {
     @FXML
     private void goToAddPet(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/add-pet-page.fxml"));
+        middleRootPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void goToEditPet(ActionEvent event) throws IOException {
+        ObservableList<Pet> selectedRow, allPets;
+        allPets = tblview.getItems();
+
+        // Get the rows that are selected
+        selectedRow = tblview.getSelectionModel().getSelectedItems();
+
+        for(Pet pet: selectedRow) {
+            selectedPetId = pet.getId();
+            selectedPetName = pet.getName();
+            selectedPetSpecie = pet.getSpecie();
+            selectedPetCoatColour = pet.getCoat_colour();
+            selectedPetDob = LocalDate.parse(pet.getDob());
+            selectedPetNotes = pet.getNotes();
+        }
+
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/edit-pet-page.fxml"));
         middleRootPane.getChildren().setAll(pane);
     }
 }

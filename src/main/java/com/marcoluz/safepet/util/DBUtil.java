@@ -73,5 +73,27 @@ public class DBUtil {
 
     }
 
+    public static int getNewId(String table) {
+        String SQL = "SELECT id FROM "+ table +" ORDER BY id DESC LIMIT 1";
+
+        try (Connection conn = connect();
+             PreparedStatement preStat = conn.prepareStatement(SQL))
+        {
+            ResultSet result = preStat.executeQuery();
+
+            if(result.next()) {
+                return (result.getInt("id") + 1);
+            }
+            else {
+                return 0;
+            }
+
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return -1;
+        }
+    }
+
 
 }

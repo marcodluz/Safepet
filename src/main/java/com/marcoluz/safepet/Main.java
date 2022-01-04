@@ -28,10 +28,10 @@ public class Main extends Application {
             String account = "CREATE TABLE account (id INTEGER PRIMARY KEY, first_name VARCHAR(50), last_name VARCHAR(50), email VARCHAR(30), password VARCHAR(30));";
             DBUtil.sqlUpdate(account);
 
-            String pet = "CREATE TABLE pet (id INTEGER PRIMARY KEY, account_id INTEGER, name VARCHAR(50), specie VARCHAR(50), coat_colour VARCHAR(50), dob VARCHAR(50), notes VARCHAR(200));";
+            String pet = "CREATE TABLE pet (id INTEGER PRIMARY KEY, account_id INTEGER, name VARCHAR(50), specie VARCHAR(50), coat_colour VARCHAR(50), dob VARCHAR(20), notes VARCHAR(200));";
             DBUtil.sqlUpdate(pet);
 
-            String appointment = "CREATE TABLE appointment (id INTEGER PRIMARY KEY, account_id INTEGER, pet_id INTEGER, type VARCHAR(50), date date);";
+            String appointment = "CREATE TABLE appointment (id INTEGER PRIMARY KEY, account_id INTEGER, pet_id INTEGER, type VARCHAR(50), status VARCHAR(50), date VARCHAR(20));";
             DBUtil.sqlUpdate(appointment);
         }
     }
