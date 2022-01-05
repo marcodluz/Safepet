@@ -12,237 +12,237 @@
 
 <AnchorPane fx:id="middleRootPane" prefHeight="720.0" prefWidth="880.0" stylesheets="@styles/css/design1.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marcoluz.safepet.controller.AccountController">
     <children>
-      <VBox minWidth="880.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-              <Label prefWidth="200.0" text="Account">
-                  <font>
-                      <Font name="System Bold" size="25.0" />
-                  </font>
-              </Label>
-            <Label text="Change your name details:">
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <HBox prefHeight="50.0" prefWidth="880.0">
-               <children>
-                  <VBox>
-                     <children>
-                        <TextField fx:id="accountFirstName" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="200.0" prefHeight="50.0" prefWidth="200.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets left="10.0" top="10.0" />
-                           </padding>
-                        </TextField>
-                        <Label text="First name" textFill="SILVER">
-                           <VBox.margin>
-                              <Insets left="11.0" top="-46.0" />
-                           </VBox.margin>
+        <VBox minWidth="880.0" prefWidth="880.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label prefWidth="200.0" text="Account">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                </Label>
+                <Label text="Change your name details:">
+                    <VBox.margin>
+                        <Insets top="30.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+                <HBox prefHeight="50.0" prefWidth="880.0">
+                    <children>
+                        <VBox>
+                            <children>
+                                <TextField fx:id="accountFirstName" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="200.0" prefHeight="50.0" prefWidth="200.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="10.0" top="10.0" />
+                                    </padding>
+                                </TextField>
+                                <Label text="First name" textFill="SILVER">
+                                    <VBox.margin>
+                                        <Insets left="11.0" top="-46.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox>
+                            <children>
+                                <TextField fx:id="accountLastName" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="200.0" prefHeight="50.0" prefWidth="200.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="10.0" top="10.0" />
+                                    </padding>
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                </TextField>
+                                <Label text="Last name" textFill="SILVER">
+                                    <VBox.margin>
+                                        <Insets left="11.0" top="-46.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="4.0" />
+                            </HBox.margin>
+                        </VBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox maxWidth="404.0" minWidth="404.0" prefWidth="404.0">
+                    <children>
+                        <Label fx:id="firstNameError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="200.0" textFill="RED">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                            <padding>
+                                <Insets left="11.0" />
+                            </padding>
                         </Label>
-                     </children>
-                  </VBox>
-                  <VBox>
-                     <children>
-                        <TextField fx:id="accountLastName" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="200.0" prefHeight="50.0" prefWidth="200.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets left="10.0" top="10.0" />
-                           </padding>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </TextField>
-                        <Label text="Last name" textFill="SILVER">
-                           <VBox.margin>
-                              <Insets left="11.0" top="-46.0" />
-                           </VBox.margin>
+                        <Label fx:id="lastNameError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="200.0" textFill="RED">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="5.0" />
+                            </HBox.margin>
+                            <padding>
+                                <Insets left="11.0" />
+                            </padding>
                         </Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="4.0" />
-                     </HBox.margin>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox maxWidth="404.0" minWidth="404.0" prefWidth="404.0">
-               <children>
-                  <Label fx:id="firstNameError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="200.0" textFill="RED">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                     <padding>
-                        <Insets left="11.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="lastNameError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="200.0" textFill="RED">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets left="11.0" />
-                     </padding>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets top="2.0" />
-               </VBox.margin>
-            </HBox>
-            <Label text="Change your email:">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <HBox prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <VBox prefHeight="50.0" prefWidth="880.0">
-                     <children>
-                        <TextField fx:id="accountEmail" maxHeight="50.0" maxWidth="404.0" minHeight="50.0" minWidth="404.0" prefHeight="50.0" prefWidth="404.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets left="10.0" top="10.0" />
-                           </padding>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </TextField>
-                        <Label text="Email" textFill="SILVER">
-                           <VBox.margin>
-                              <Insets left="11.0" top="-46.0" />
-                           </VBox.margin>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="2.0" />
+                    </VBox.margin>
+                </HBox>
+                <Label text="Change your email:">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+                <HBox prefHeight="50.0" prefWidth="200.0">
+                    <children>
+                        <VBox prefHeight="50.0" prefWidth="880.0">
+                            <children>
+                                <TextField fx:id="accountEmail" maxHeight="50.0" maxWidth="404.0" minHeight="50.0" minWidth="404.0" prefHeight="50.0" prefWidth="404.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets left="10.0" top="10.0" />
+                                    </padding>
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                </TextField>
+                                <Label text="Email" textFill="SILVER">
+                                    <VBox.margin>
+                                        <Insets left="11.0" top="-46.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </VBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox maxWidth="404.0" minWidth="404.0" prefWidth="404.0">
+                    <children>
+                        <Label fx:id="emailError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="200.0" textFill="RED">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                            <padding>
+                                <Insets left="11.0" />
+                            </padding>
                         </Label>
-                     </children>
-                     <HBox.margin>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="2.0" />
+                    </VBox.margin>
+                </HBox>
+                <Label text="Change your password:" />
+                <HBox prefHeight="50.0" prefWidth="880.0">
+                    <children>
+                        <VBox>
+                            <children>
+                                <PasswordField fx:id="accountNewPassword" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="404.0" prefHeight="50.0" prefWidth="200.0">
+                                    <padding>
+                                        <Insets left="10.0" top="10.0" />
+                                    </padding>
+                                </PasswordField>
+                                <Label text="New Password" textFill="SILVER">
+                                    <VBox.margin>
+                                        <Insets left="11.0" top="-46.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox maxWidth="404.0" minWidth="404.0" prefWidth="404.0">
+                    <children>
+                        <Label fx:id="passwordError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="200.0" textFill="RED">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                            <padding>
+                                <Insets left="11.0" />
+                            </padding>
+                        </Label>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="2.0" />
+                    </VBox.margin>
+                </HBox>
+                <Label text="Enter your current password to update any detail:">
+                    <VBox.margin>
                         <Insets />
-                     </HBox.margin>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox maxWidth="404.0" minWidth="404.0" prefWidth="404.0">
-               <children>
-                  <Label fx:id="emailError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="200.0" textFill="RED">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                     <padding>
-                        <Insets left="11.0" />
-                     </padding>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets top="2.0" />
-               </VBox.margin>
-            </HBox>
-            <Label text="Change your password:" />
-            <HBox prefHeight="50.0" prefWidth="880.0">
-               <children>
-                  <VBox>
-                     <children>
-                        <PasswordField fx:id="accountNewPassword" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="404.0" prefHeight="50.0" prefWidth="200.0">
-                           <padding>
-                              <Insets left="10.0" top="10.0" />
-                           </padding>
-                        </PasswordField>
-                        <Label text="New Password" textFill="SILVER">
-                           <VBox.margin>
-                              <Insets left="11.0" top="-46.0" />
-                           </VBox.margin>
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+                <HBox prefHeight="50.0" prefWidth="880.0">
+                    <children>
+                        <VBox>
+                            <children>
+                                <PasswordField fx:id="accountPassword" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="404.0" prefHeight="50.0" prefWidth="200.0">
+                                    <padding>
+                                        <Insets left="10.0" top="10.0" />
+                                    </padding>
+                                </PasswordField>
+                                <Label text="Old Password *" textFill="SILVER">
+                                    <VBox.margin>
+                                        <Insets left="11.0" top="-46.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox maxWidth="404.0" minWidth="404.0" prefWidth="404.0">
+                    <children>
+                        <Label fx:id="oldPasswordError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="200.0" textFill="RED">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                            <padding>
+                                <Insets left="11.0" />
+                            </padding>
                         </Label>
-                     </children>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox maxWidth="404.0" minWidth="404.0" prefWidth="404.0">
-               <children>
-                  <Label fx:id="passwordError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="200.0" textFill="RED">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                     <padding>
-                        <Insets left="11.0" />
-                     </padding>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets top="2.0" />
-               </VBox.margin>
-            </HBox>
-            <Label text="Enter your current password to update any detail:">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <HBox prefHeight="50.0" prefWidth="880.0">
-               <children>
-                  <VBox>
-                     <children>
-                        <PasswordField fx:id="accountPassword" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="404.0" prefHeight="50.0" prefWidth="200.0">
-                           <padding>
-                              <Insets left="10.0" top="10.0" />
-                           </padding>
-                        </PasswordField>
-                        <Label text="Old Password *" textFill="SILVER">
-                           <VBox.margin>
-                              <Insets left="11.0" top="-46.0" />
-                           </VBox.margin>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox maxWidth="404.0" minWidth="404.0" prefWidth="404.0">
-               <children>
-                  <Label fx:id="oldPasswordError" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="200.0" textFill="RED">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                     <padding>
-                        <Insets left="11.0" />
-                     </padding>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets top="2.0" />
-               </VBox.margin>
-            </HBox>
-            <Button maxHeight="45.0" maxWidth="400.0" mnemonicParsing="false" onAction="#updateAccount" prefHeight="45.0" prefWidth="400.0" styleClass="button-yellow" text="Update Account" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="2.0" />
+                    </VBox.margin>
+                </HBox>
+                <Button maxHeight="45.0" maxWidth="400.0" mnemonicParsing="false" onAction="#updateAccount" prefHeight="45.0" prefWidth="400.0" styleClass="button-yellow" text="Update Account" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
     </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
 </AnchorPane>

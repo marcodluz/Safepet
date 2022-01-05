@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.marcoluz.safepet/com.marcoluz.safepet.HelloApplication</mainClass>
+                            <mainClass>com.marcoluz.safepet/com.marcoluz.safepet.Main</mainClass>
                         </configuration>
                     </execution>
                 </executions>
