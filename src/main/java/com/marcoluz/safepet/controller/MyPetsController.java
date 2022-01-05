@@ -10,19 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -72,7 +66,7 @@ public class MyPetsController implements Initializable {
 
     public ObservableList<Pet> getPetList() throws SQLException {
         ObservableList<Pet> petObservableList = FXCollections.observableArrayList();
-        String myQuery = "SELECT * FROM pet WHERE account_id =" + MainController.id + " ORDER BY id DESC";
+        String myQuery = "SELECT * FROM pet WHERE account_id =" + MainController.id + " ORDER BY id ASC";
 
         ResultSet rs= DBUtil.sqlExecute(myQuery);
         Pet pet;
@@ -119,17 +113,21 @@ public class MyPetsController implements Initializable {
             // Loop over selected rows and remove the objects
             for(Pet pet: selectedRow) {
                 // Variables
-                String SQL = "DELETE FROM pet WHERE id = ?";
                 int id = pet.getId();
 
-                try (Connection conn = DBUtil.connect();
-                     PreparedStatement prepareStatement = conn.prepareStatement(SQL)){
+                try (Connection conn = DBUtil.connect()){
 
-                    // Define the PET id to the respective row
-                    prepareStatement.setInt(1, id);
+                    //Delete the selected pet from the DB table
+                    DBUtil.sqlExecute("DELETE FROM pet WHERE id =" + id);
 
-                    // Execute the delete statement
-                    prepareStatement.executeUpdate();
+                    //Delete the appointments from the DB table of the selected pet
+                    DBUtil.sqlExecute("DELETE FROM appointment WHERE pet_id =" + id);
+
+                    //Delete the medications from the DB table of the selected pet
+                    DBUtil.sqlExecute("DELETE FROM medication WHERE pet_id =" + id);
+
+                    //Delete the weights from the DB table of the selected pet
+                    DBUtil.sqlExecute("DELETE FROM weight WHERE pet_id =" + id);
 
                     // Remove row from the table view
                     Platform.runLater(() -> allPets.remove(pet));

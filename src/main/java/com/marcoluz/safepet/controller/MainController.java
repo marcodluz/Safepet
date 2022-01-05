@@ -5,7 +5,6 @@ import com.marcoluz.safepet.dao.AccountDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,8 +14,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class MainController {
     @FXML
@@ -47,6 +44,8 @@ public class MainController {
     private Button btnMyPets;
     @FXML
     private Button btnMyAppointments;
+    @FXML
+    private Button btnHealth;
     @FXML
     private Button btnLogout;
     @FXML
@@ -140,6 +139,10 @@ public class MainController {
         else if(event.getSource() == btnMyAppointments) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/appointments-page.fxml"));
             contentArea.setBackground(new Background(new BackgroundFill(Color.rgb(63, 43, 99), CornerRadii.EMPTY, Insets.EMPTY)));
+            middleRootPane.getChildren().setAll(pane);
+        }
+        else if(event.getSource() == btnHealth) {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/health-page.fxml"));
             middleRootPane.getChildren().setAll(pane);
         }
         else if(event.getSource() == btnAccount) {

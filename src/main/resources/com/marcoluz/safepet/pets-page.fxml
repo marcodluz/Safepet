@@ -21,12 +21,12 @@
               </Label>
             <TableView fx:id="tblview" prefWidth="880.0">
               <columns>
-                  <TableColumn fx:id="clm_id" prefWidth="40.0" text="ID" />
+                  <TableColumn fx:id="clm_id" prefWidth="60.0" text="PET ID" />
                   <TableColumn fx:id="clm_name" prefWidth="145.0" text="NAME" />
                   <TableColumn fx:id="clm_specie" prefWidth="140.0" text="SPECIE" />
                   <TableColumn fx:id="clm_coat_colour" prefWidth="143.0" text="COAT COLOUR" />
                   <TableColumn fx:id="clm_dob" minWidth="0.0" prefWidth="142.0" text="DATE OF BIRTH" />
-                  <TableColumn fx:id="clm_notes" maxWidth="347.0" prefWidth="194.0" text="NOTES" />
+                  <TableColumn fx:id="clm_notes" maxWidth="347.0" prefWidth="174.0" text="NOTES" />
               </columns>
                <VBox.margin>
                   <Insets top="15.0" />

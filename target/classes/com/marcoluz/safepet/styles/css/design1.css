@@ -44,19 +44,18 @@
 .table-view .column-header .filler,
 .table-view .column-header-background .filler {
     -fx-stroke: transparent;
+    -fx-background-color: #eee;
     -fx-size:50;
     -fx-alignment: CENTER ;
     -fx-text-alignment: center;
 
 }
 .table-row-cell:filled:hover {
-
     -fx-size:50;
     -fx-alignment: CENTER;
     -fx-text-alignment: center;
-
-
 }
+
 .table-view:row-selection {
     -fx-background-color: transparent;
     -fx-text-fill: white;
@@ -71,9 +70,6 @@
     -fx-alignment: CENTER
 
 }
-
-
-
 
 
 /* Main Border Pane */

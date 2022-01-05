@@ -18,7 +18,7 @@
                       <Font name="System Bold" size="25.0" />
                   </font>
               </Label>
-            <GridPane maxHeight="100.0" maxWidth="400.0" prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: #686de0;">
+            <GridPane maxHeight="100.0" maxWidth="400.0" prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: #F9CA24;">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="0.0" prefWidth="80.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.0" minWidth="10.0" prefWidth="245.0" />

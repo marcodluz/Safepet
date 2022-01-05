@@ -2,8 +2,6 @@ package com.marcoluz.safepet.controller;
 
 import com.marcoluz.safepet.DataValidation;
 import com.marcoluz.safepet.dao.AppointmentsDAO;
-import com.marcoluz.safepet.dao.PetDAO;
-import com.marcoluz.safepet.model.Appointment;
 import com.marcoluz.safepet.model.Pet;
 import com.marcoluz.safepet.util.DBUtil;
 import javafx.beans.value.ChangeListener;
@@ -15,18 +13,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 public class AddAppointmentController implements Initializable {
     @FXML
@@ -73,7 +69,8 @@ public class AddAppointmentController implements Initializable {
         // Check date if is less than today
         ///REMEMBER
 
-        if (!appointmentPetValidatorNull && !appointmentTypeValidatorNull)
+        if (!appointmentPetValidatorNull && !appointmentTypeValidatorNull
+                && !isDatePast(String.valueOf(appointmentDatePicker.getValue()),  "yyyy-MM-dd"))
         {
             System.out.println("Appointment successfully created!");
 
@@ -107,5 +104,17 @@ public class AddAppointmentController implements Initializable {
         appointmentPet.setItems(null);
         appointmentPet.setItems(petOptions);
     }
+
+    public boolean isDatePast(final String date, final String dateFormat) {
+        LocalDate localDate = LocalDate.now(ZoneId.systemDefault());
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateFormat);
+        LocalDate inputDate = LocalDate.parse(date, dtf);
+
+        appointmentDateError.setText("You cannot choose a past date");
+
+        return inputDate.isBefore(localDate);
+    }
+
 
 }

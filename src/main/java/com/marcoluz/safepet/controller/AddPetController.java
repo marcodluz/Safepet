@@ -1,7 +1,6 @@
 package com.marcoluz.safepet.controller;
 
 import com.marcoluz.safepet.DataValidation;
-import com.marcoluz.safepet.dao.AccountDAO;
 import com.marcoluz.safepet.dao.PetDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.util.Optional;
 
 public class AddPetController {
     @FXML

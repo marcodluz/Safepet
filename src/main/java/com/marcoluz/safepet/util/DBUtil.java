@@ -26,7 +26,7 @@ public class DBUtil {
         try{
             Statement sqlStat = db.createStatement();
             sqlStat.executeUpdate(statement);
-            System.out.println("SQL statement updated successfully!");
+
         }catch (Exception e){
             System.out.println(e);
         }
@@ -36,40 +36,12 @@ public class DBUtil {
         try {
             Statement sqlStat = db.createStatement();
             ResultSet rs = sqlStat.executeQuery(statement);
-            System.out.println("SQL statement executed successfully!");
-            return rs;
 
+            return rs;
         }catch (Exception e){
             System.out.println("SQL Error!");
         }
         return null;
-
-    }
-
-    public static void prepupdate(String pStatement, String[] values){
-        try{
-            PreparedStatement prepStat = db.prepareStatement(pStatement);
-            prepStat.setInt(1, Integer.parseInt(values[2]));
-            prepStat.setString(2,values[1]);
-            prepStat.setString(3,values[0]);
-
-            prepStat.setDate(4,Date.valueOf(values[3]));
-            prepStat.executeUpdate();
-            System.out.println("Entry Updated... ");
-
-        }catch (Exception e){
-            System.out.println("SQL Error...");
-            System.out.println(e);
-        }
-    }
-
-    public static void disconnect(){
-        try {
-            db.close();
-            System.out.println("Database disconnected successfully!");
-        }catch (Exception e){
-            System.out.println("Database disconnected unsuccessfully!");
-        }
 
     }
 
@@ -87,13 +59,9 @@ public class DBUtil {
             else {
                 return 0;
             }
-
-
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return -1;
         }
     }
-
-
 }

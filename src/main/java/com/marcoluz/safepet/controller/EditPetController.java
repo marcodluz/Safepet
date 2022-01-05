@@ -1,7 +1,6 @@
 package com.marcoluz.safepet.controller;
 
 import com.marcoluz.safepet.DataValidation;
-import com.marcoluz.safepet.dao.PetDAO;
 import com.marcoluz.safepet.util.DBUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

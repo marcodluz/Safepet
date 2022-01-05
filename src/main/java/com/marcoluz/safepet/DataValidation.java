@@ -85,4 +85,16 @@ public class DataValidation {
         inputLabel.setText(validationString);
         return isChar;
     }
+
+    public static boolean numberOnly(TextField inputTextField, Label inputLabel, String validationText) {
+        boolean isNumber = true;
+        String validationString = null;
+
+        if (!inputTextField.getText().matches("[0-9]+")) {
+            isNumber = false;
+            validationString = validationText;
+        }
+        inputLabel.setText(validationString);
+        return isNumber;
+    }
 }
