@@ -5,7 +5,6 @@ import com.marcoluz.safepet.util.DBUtil;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,43 +18,31 @@ public class AccountDAO {
             prepStat.setString(2,values[0]);
             prepStat.setString(3,values[1]);
             prepStat.setString(4,values[2]);
-            prepStat.setString(5,values[3]);
             prepStat.executeUpdate();
 
         }catch (Exception e){
-            System.out.println("SQL Error!");
             System.out.println(e);
         }
     }
 
-    public static boolean checkLoginDetails(String email, String password) {
-        String SQL = "SELECT count(*) AS total FROM account WHERE (email = ? AND  password = ?)";
+    public static boolean checkLoginDetails(String email, String password) throws SQLException {
+        String SQL = "SELECT * FROM account WHERE (email = '"+ email +"' AND  password = crypt('"+ password +"', password)) LIMIT 1";
+        ResultSet rs = DBUtil.sqlExecute(SQL);
 
-        try (Connection conn = DBUtil.connect();
-             PreparedStatement preStat = conn.prepareStatement(SQL))
-        {
-            preStat.setString(1, email);
-            preStat.setString(2, password);
-            ResultSet result = preStat.executeQuery();
-            result.next();
-
-            if(result.getInt("total") == 1) {
-                System.out.println("Account login successful!");
-                return true;
-            }
-            else {
-                System.out.println("Account login unsuccessful!");
-                return false;
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        // Check if exists at least 1 row of data in the table
+        if(rs.next()) {
+            System.out.println("Account login successful!");
+            return true;
+        }
+        else {
+            System.out.println("Account login unsuccessful!");
             return false;
         }
     }
 
-    public static boolean checkPassword(PasswordField password, Label errorLabel, String errorText) {
+    public static boolean checkPassword(PasswordField password, Label errorLabel, String errorText) throws SQLException {
         if ((AccountDAO.getPassword(MainController.email).equals(password.getText()))) {
+            // Set the error label with the error text
             errorLabel.setText(errorText);
 
             return true;
@@ -64,7 +51,8 @@ public class AccountDAO {
         return false;
     }
 
-    public static boolean checkEmail(TextField email, Label errorLabel, String errorText) {
+    public static boolean checkEmail(TextField email, Label errorLabel, String errorText) throws SQLException {
+        // Check if the emails are the same
         if ((AccountDAO.getEmail(MainController.email).equals(email.getText()))) {
             errorLabel.setText(errorText);
             return true;
@@ -72,124 +60,85 @@ public class AccountDAO {
         return false;
     }
 
-    public static boolean checkEmailExists(TextField email, Label errorLabel, String errorText) {
-        String SQL = "SELECT email FROM account WHERE (email = ?)";
+    public static boolean checkEmailExists(TextField email, Label errorLabel, String errorText) throws SQLException {
+        String SQL = "SELECT email FROM account WHERE (email = '"+ email.getText() +"')";
+        ResultSet rs = DBUtil.sqlExecute(SQL);
 
-        try (Connection conn = DBUtil.connect();
-             PreparedStatement preStat = conn.prepareStatement(SQL))
-        {
-            preStat.setString(1, email.getText());
-            ResultSet result = preStat.executeQuery();
-            if(result.next() && !(result.getString(1).equals(MainController.email))) {
-                errorLabel.setText(errorText);
-                return true;
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        // Check if email exists and is equal to the inserted one
+        if(rs.next() && !(rs.getString(1).equals(MainController.email))) {
+            errorLabel.setText(errorText);
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
-    public static int generateAccountId() {
+    public static int generateAccountId() throws SQLException {
         return DBUtil.getNewId("account");
     }
 
-    public static int getId(String email, String password) {
-        String SQL = "SELECT id FROM account WHERE (email = ? AND  password = ?)";
+    public static int getId(String email, String password) throws SQLException {
+        String SQL = "SELECT id FROM account WHERE (email = '"+ email +"' AND  password = crypt('"+ password +"', password)) LIMIT 1";
+        ResultSet rs = DBUtil.sqlExecute(SQL);
 
-        try (Connection conn = DBUtil.connect();
-             PreparedStatement preStat = conn.prepareStatement(SQL))
-        {
-            preStat.setString(1, email);
-            preStat.setString(2, password);
-            ResultSet result = preStat.executeQuery();
-            result.next();
-
-            return result.getInt(1);
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        // Check if exists an account
+        if(rs.next()) {
+            return rs.getInt(1);
         }
-
-        return 0;
+        else {
+            return 0;
+        }
     }
 
-    public static String getFirstName(String email, String password) {
-        String SQL = "SELECT first_name FROM account WHERE (email = ? AND  password = ?)";
+    public static String getFirstName(String email, String password) throws SQLException {
+        String SQL = "SELECT first_name FROM account WHERE (email = '"+ email +"' AND  password = crypt('"+ password +"', password)) LIMIT 1";
+        ResultSet rs = DBUtil.sqlExecute(SQL);
 
-        try (Connection conn = DBUtil.connect();
-             PreparedStatement preStat = conn.prepareStatement(SQL))
-        {
-            preStat.setString(1, email);
-            preStat.setString(2, password);
-            ResultSet result = preStat.executeQuery();
-            result.next();
-
-            return result.getString(1);
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        // Check if exists an account
+        if(rs.next()) {
+            return rs.getString(1);
         }
-
-        return "";
+        else {
+            return "";
+        }
     }
 
-    public static String getLastName(String email, String password) {
-        String SQL = "SELECT last_name FROM account WHERE (email = ? AND  password = ?)";
+    public static String getLastName(String email, String password) throws SQLException {
+        String SQL = "SELECT last_name FROM account WHERE (email = '"+ email +"' AND  password = crypt('"+ password +"', password)) LIMIT 1";
+        ResultSet rs = DBUtil.sqlExecute(SQL);
 
-        try (Connection conn = DBUtil.connect();
-             PreparedStatement preStat = conn.prepareStatement(SQL))
-        {
-            preStat.setString(1, email);
-            preStat.setString(2, password);
-            ResultSet result = preStat.executeQuery();
-            result.next();
-
-            return result.getString(1);
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        // Check if exists an account
+        if(rs.next()) {
+            return rs.getString(1);
         }
-
-        return "";
+        else {
+            return "";
+        }
     }
 
-    public static String getEmail(String email) {
-        String SQL = "SELECT email FROM account WHERE (email = ?)";
+    public static String getEmail(String email) throws SQLException {
+        String SQL = "SELECT email FROM account WHERE (email = '"+ email +"') LIMIT 1";
+        ResultSet rs = DBUtil.sqlExecute(SQL);
 
-        try (Connection conn = DBUtil.connect();
-             PreparedStatement preStat = conn.prepareStatement(SQL))
-        {
-            preStat.setString(1, email);
-            ResultSet result = preStat.executeQuery();
-            result.next();
-
-            return result.getString(1);
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        // Check if exists an account
+        if(rs.next()) {
+            return rs.getString(1);
         }
-
-        return "";
+        else {
+            return "";
+        }
     }
 
-    public static String getPassword(String email) {
+    public static String getPassword(String email) throws SQLException {
+        String SQL = "SELECT email FROM account WHERE (email = '"+ email +"') LIMIT 1";
+        ResultSet rs = DBUtil.sqlExecute(SQL);
 
-        String SQL = "SELECT password FROM account WHERE (email = ?)";
-
-        try (Connection conn = DBUtil.connect();
-             PreparedStatement preStat = conn.prepareStatement(SQL))
-        {
-            preStat.setString(1, email);
-            ResultSet result = preStat.executeQuery();
-            result.next();
-
-            return result.getString(1);
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        // Check if exists an account
+        if(rs.next()) {
+            return rs.getString(1);
         }
-
-        return "";
+        else {
+            return "";
+        }
     }
 }

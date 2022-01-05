@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -29,6 +28,8 @@ public class AppointmentsController implements Initializable {
     @FXML
     private TableView<Appointment> tblview;
     @FXML
+    private TableView<Appointment> tblview2;
+    @FXML
     private TableColumn<Appointment, Integer> clm_pet_id;
     @FXML
     private TableColumn<Appointment,String> clm_type;
@@ -36,8 +37,6 @@ public class AppointmentsController implements Initializable {
     private TableColumn<Appointment,String> clm_date;
     @FXML
     private TableColumn<Appointment,String> clm_status;
-    @FXML
-    private TableView<Appointment> tblview2;
     @FXML
     private TableColumn<Appointment, Integer> clm_past_pet_id;
     @FXML
@@ -56,24 +55,23 @@ public class AppointmentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            listAppointments();
-            listPastAppointments();
+            listAppointments(); // Show appointments info in the table
+            listPastAppointments(); // Show appointments until yesterday info in the table
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        // Disable the buttons until a row is selected
         btnCancel.disableProperty().bind(Bindings.isEmpty(tblview.getSelectionModel().getSelectedItems()));
         btnDelete.disableProperty().bind(Bindings.isEmpty(tblview.getSelectionModel().getSelectedItems()));
     }
 
+    // Obtain the appointments from the database
     public ObservableList<Appointment> getAppointmentList() throws SQLException {
         LocalDate localDate = LocalDate.now(ZoneId.systemDefault());
-
         ObservableList<Appointment> appointmentsObservableList = FXCollections.observableArrayList();
-        String myQuery =
-                "SELECT * FROM appointment WHERE (account_id = "+ MainController.id +" AND date >= '"+ localDate +"') ORDER BY date ASC";
-
-        ResultSet rs = DBUtil.sqlExecute(myQuery);
+        String SQL = "SELECT * FROM appointment WHERE (account_id = "+ MainController.id +" AND date >= '"+ localDate +"') ORDER BY date ASC";
+        ResultSet rs = DBUtil.sqlExecute(SQL);
         Appointment appointment;
 
         while (rs.next()){
@@ -83,18 +81,23 @@ public class AppointmentsController implements Initializable {
         return appointmentsObservableList;
     }
 
+    // Show the appointments in the table
     public void listAppointments() throws SQLException {
         ObservableList<Appointment> list = getAppointmentList();
+
         clm_pet_id.setCellValueFactory(new PropertyValueFactory<Appointment,Integer>("pet_id"));
         clm_type.setCellValueFactory(new PropertyValueFactory<Appointment,String>("type"));
         clm_date.setCellValueFactory(new PropertyValueFactory<Appointment,String>("date"));
         clm_status.setCellValueFactory(new PropertyValueFactory<Appointment,String>("status"));
+
         tblview.setItems(list);
 
         // Allow the selection of multiple rows in the table
+        // DISABLED. But could be implemented if wanted to delete multiple rows at the same time
         //tblview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
+    // Obtain the appointments until yesterday from the database
     public ObservableList<Appointment> getPastAppointmentList() throws SQLException {
         LocalDate localDate = LocalDate.now(ZoneId.systemDefault());
 
@@ -112,18 +115,21 @@ public class AppointmentsController implements Initializable {
         return appointmentsObservableList;
     }
 
+    // Show the appointments until yesterday in the table
     public void listPastAppointments() throws SQLException {
         ObservableList<Appointment> list = getPastAppointmentList();
+
         clm_past_pet_id.setCellValueFactory(new PropertyValueFactory<Appointment,Integer>("pet_id"));
         clm_past_type.setCellValueFactory(new PropertyValueFactory<Appointment,String>("type"));
         clm_past_date.setCellValueFactory(new PropertyValueFactory<Appointment,String>("date"));
         clm_past_status.setCellValueFactory(new PropertyValueFactory<Appointment,String>("status"));
         tblview2.setItems(list);
 
-        // Allow the selection of multiple rows in the table
+        // Do not allow any selection on the table
         tblview2.setSelectionModel(null);
     }
 
+    @FXML
     public void deleteSelectedAppointment(ActionEvent event) {
         ObservableList<Appointment> selectedRow, allAppointments;
         allAppointments = tblview.getItems();
@@ -131,14 +137,12 @@ public class AppointmentsController implements Initializable {
         // Get the rows that are selected
         selectedRow = tblview.getSelectionModel().getSelectedItems();
 
+        // Show an alert screen to double-check if the user wants to execute the action
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-
         alert.setContentText("This action is permanent!");
         alert.setTitle("Delete Appointment");
         alert.setHeaderText("Are you sure you want to delete?");
-
         ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -168,12 +172,6 @@ public class AppointmentsController implements Initializable {
     }
 
     @FXML
-    private void goToAddAppointment(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/add-appointment-page.fxml"));
-        middleRootPane.getChildren().setAll(pane);
-    }
-
-    @FXML
     private void cancelAppointment(ActionEvent event) throws IOException {
         ObservableList<Appointment> selectedRow, allAppointments;
         allAppointments = tblview.getItems();
@@ -181,14 +179,12 @@ public class AppointmentsController implements Initializable {
         // Get the rows that are selected
         selectedRow = tblview.getSelectionModel().getSelectedItems();
 
+        // Show an alert screen to double-check if the user wants to execute the action
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-
         alert.setContentText("This action is permanent!");
         alert.setTitle("Cancel Appointment");
         alert.setHeaderText("Are you sure you want to cancel it?");
-
         ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -214,6 +210,12 @@ public class AppointmentsController implements Initializable {
         }
 
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/appointments-page.fxml"));
+        middleRootPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void goToAddAppointment(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/add-appointment-page.fxml"));
         middleRootPane.getChildren().setAll(pane);
     }
 }

@@ -45,6 +45,7 @@ public class MyPetsController implements Initializable {
     @FXML
     private Button btnEditPet;
 
+    // Main Variables
     public static int selectedPetId;
     public static String selectedPetName;
     public static String selectedPetSpecie;
@@ -55,21 +56,23 @@ public class MyPetsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            listPets();
+            listPets(); // Show pets info in the table
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        // Disable the buttons until a row is selected
         btnEditPet.disableProperty().bind(Bindings.isEmpty(tblview.getSelectionModel().getSelectedItems()));
         btnDelPet.disableProperty().bind(Bindings.isEmpty(tblview.getSelectionModel().getSelectedItems()));
     }
 
+    // Obtain the pets from the database
     public ObservableList<Pet> getPetList() throws SQLException {
         ObservableList<Pet> petObservableList = FXCollections.observableArrayList();
-        String myQuery = "SELECT * FROM pet WHERE account_id =" + MainController.id + " ORDER BY id ASC";
-
-        ResultSet rs= DBUtil.sqlExecute(myQuery);
+        String SQL = "SELECT * FROM pet WHERE account_id =" + MainController.id + " ORDER BY id ASC";
+        ResultSet rs = DBUtil.sqlExecute(SQL);
         Pet pet;
+
         while (rs.next()){
             pet = new Pet(rs.getInt("id"),rs.getInt("account_id"),
                     rs.getString("name"),rs.getString("specie"), rs.getString("coat_colour"), rs.getString("dob"), rs.getString("notes"));
@@ -78,20 +81,25 @@ public class MyPetsController implements Initializable {
         return petObservableList;
     }
 
+    // Show the pets in the table
     public void listPets() throws SQLException {
         ObservableList<Pet> list = getPetList();
+
         clm_id.setCellValueFactory(new PropertyValueFactory<Pet,Integer>("id"));
         clm_name.setCellValueFactory(new PropertyValueFactory<Pet,String>("name"));
         clm_specie.setCellValueFactory(new PropertyValueFactory<Pet,String>("specie"));
         clm_coat_colour.setCellValueFactory(new PropertyValueFactory<Pet,String>("coat_colour"));
         clm_dob.setCellValueFactory(new PropertyValueFactory<Pet,String>("dob"));
         clm_notes.setCellValueFactory(new PropertyValueFactory<Pet,String>("notes"));
+
         tblview.setItems(list);
 
         // Allow the selection of multiple rows in the table
+        // DISABLED. But could be implemented if wanted to delete multiple rows at the same time
         //tblview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
+    // Delete the selected pet from the database and the table view
     public void deleteSelectedPet(ActionEvent event) {
         ObservableList<Pet> selectedRow, allPets;
         allPets = tblview.getItems();
@@ -99,14 +107,12 @@ public class MyPetsController implements Initializable {
         // Get the rows that are selected
         selectedRow = tblview.getSelectionModel().getSelectedItems();
 
+        // Show an alert screen to double-check if the user wants to execute the action
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-
         alert.setContentText("This action is permanent!");
         alert.setTitle("Delete Pet");
         alert.setHeaderText("Are you sure you want to delete?");
-
         ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {

@@ -10,7 +10,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,6 +36,7 @@ public class EditPetController implements Initializable {
     @FXML
     private Label petCoatColourError;
 
+    // Main Variables
     private String mydata[] = new String[5];
 
     @Override
@@ -44,6 +44,7 @@ public class EditPetController implements Initializable {
         setPetInfo();
     }
 
+    // Update pet information on the database
     public void updatePet(ActionEvent event) throws IOException {
         boolean petNameValidatorChar = DataValidation.charOnly(petName, petNameError, "Only characters");
         boolean petNameValidatorNull = DataValidation.textFieldNull(petName, petNameError, "Enter your pet's name");
@@ -53,34 +54,32 @@ public class EditPetController implements Initializable {
         boolean petCoatColourValidatorChar = DataValidation.charOnly(petCoatColour, petCoatColourError, "Only characters");
         boolean petCoatColourValidatorNull = DataValidation.textFieldNull(petCoatColour, petCoatColourError, "Enter your pet's coat colour");
 
-
-        // Check date if is less than today
-        ///REMEMBER
-
-
+        // Check if all the data validations are returning TRUE (means that passed the validation)
         if (petNameValidatorChar && !petNameValidatorNull && petSpecieValidatorChar
                 && !petSpecieValidatorNull && petCoatColourValidatorChar && !petDOBValidatorNull && !petCoatColourValidatorNull)
         {
-            System.out.println("Pet successfully updated!");
-
             mydata[0] = this.petName.getText();
             mydata[1] = this.petSpecie.getText();
             mydata[2] = this.petCoatColour.getText();
             mydata[3] = String.valueOf(this.petDatePicker.getValue());
             mydata[4] = this.petNotes.getText();
 
-            String updateSQL = "UPDATE pet SET name ='"+ mydata[0] +"', specie = '"+ mydata[1] +"', coat_colour = '"+ mydata[2] +"', dob = '"+ mydata[3] +"', notes = '"+ mydata[4] +"' WHERE (id = '"+ MyPetsController.selectedPetId +"');";
+            String updateSQL = "UPDATE pet SET name ='"+ mydata[0]
+                    +"', specie = '"+ mydata[1] +"', coat_colour = '"+ mydata[2] +"', dob = '"+ mydata[3]
+                    +"', notes = '"+ mydata[4] +"' WHERE (id = '"+ MyPetsController.selectedPetId +"');";
             DBUtil.sqlUpdate(updateSQL);
 
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/pets-page.fxml"));
             middleRootPane.getChildren().setAll(pane);
 
+            System.out.println("Pet successfully updated!");
         }
         else {
             System.out.println("Pet not updated!");
         }
     }
 
+    // Define the text fields with the correct pet information
     private void setPetInfo() {
         petName.setText(MyPetsController.selectedPetName);
         petSpecie.setText(MyPetsController.selectedPetSpecie);

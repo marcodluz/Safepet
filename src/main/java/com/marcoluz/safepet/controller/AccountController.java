@@ -11,9 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AccountController implements Initializable {
@@ -40,6 +40,7 @@ public class AccountController implements Initializable {
     @FXML
     private AnchorPane middleRootPane;
 
+    // Main Variables
     private String mydata[] = new String[4];
 
     @Override
@@ -47,7 +48,8 @@ public class AccountController implements Initializable {
         setAccountInfo();
     }
 
-    public void updateAccount(ActionEvent event) throws IOException {
+    @FXML
+    public void updateAccount(ActionEvent event) throws IOException, SQLException {
         boolean firstNameValidatorChar = DataValidation.charOnly(accountFirstName, firstNameError, "Only characters");
         boolean firstNameValidatorNull = DataValidation.textFieldNull(accountFirstName, firstNameError, "Enter your first name");
         boolean lastNameValidatorChar = DataValidation.charOnly(accountLastName, lastNameError, "Only characters");
@@ -67,6 +69,7 @@ public class AccountController implements Initializable {
             mydata[1] = this.accountLastName.getText();
             mydata[2] = this.accountEmail.getText();
 
+            // If the new password is empty, keep the old password
             if(passwordValidatorNull) {
                 mydata[3] = this.accountPassword.getText();
             }

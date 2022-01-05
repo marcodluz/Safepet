@@ -2,14 +2,13 @@ package com.marcoluz.safepet;
 
 import javafx.scene.control.*;
 
-import java.util.Date;
-
 public class DataValidation {
 
     public static boolean textFieldNull(TextField inputTextField, Label inputLabel, String validationText) {
         boolean isNull = false;
         String validationString = null;
 
+        // Check if the the text field is empty
         if(inputTextField.getText().isEmpty()) {
             isNull = true;
             validationString = validationText;
@@ -17,13 +16,13 @@ public class DataValidation {
 
         inputLabel.setText(validationString);
         return isNull;
-
     }
 
     public static boolean datePickerNull(DatePicker inputDatePicker, Label inputLabel, String validationText) {
         boolean isNull = false;
         String validationString = null;
 
+        // Check if the date picker has no date selected
         if(inputDatePicker.getValue() == null) {
             isNull = true;
             validationString = validationText;
@@ -38,6 +37,7 @@ public class DataValidation {
         boolean isNull = false;
         String validationString = null;
 
+        // Check if the combo box is empty
         if(inputComboBox.getValue() == null) {
             isNull = true;
             validationString = validationText;
@@ -52,6 +52,7 @@ public class DataValidation {
         boolean isNull = false;
         String validationString = null;
 
+        // Check if the password is empty
         if(inputTextField.getText().isEmpty()) {
             isNull = true;
             validationString = validationText;
@@ -66,6 +67,7 @@ public class DataValidation {
         boolean isEmail = true;
         String validationString = null;
 
+        // Check if the email is in the correct format
         if (!inputTextField.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.com")) {
             isEmail = false;
             validationString = validationText;
@@ -78,6 +80,7 @@ public class DataValidation {
         boolean isChar = true;
         String validationString = null;
 
+        // Check if it is only characters
         if (!inputTextField.getText().matches("^[a-zA-Z]*$")) {
             isChar = false;
             validationString = validationText;
@@ -90,6 +93,7 @@ public class DataValidation {
         boolean isNumber = true;
         String validationString = null;
 
+        // Check if is only numbers
         if (!inputTextField.getText().matches("[0-9]+")) {
             isNumber = false;
             validationString = validationText;

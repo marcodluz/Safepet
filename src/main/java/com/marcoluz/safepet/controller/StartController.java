@@ -23,9 +23,8 @@ public class StartController implements Initializable {
     }
 
     private void startProgram() throws IOException {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/login.fxml"));
-            rootPane.getChildren().setAll(pane);
+        // Show the first page
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/login.fxml"));
+        rootPane.getChildren().setAll(pane);
     }
-
-
 }

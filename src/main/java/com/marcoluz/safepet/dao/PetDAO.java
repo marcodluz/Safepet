@@ -2,10 +2,7 @@ package com.marcoluz.safepet.dao;
 
 import com.marcoluz.safepet.controller.MainController;
 import com.marcoluz.safepet.util.DBUtil;
-
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PetDAO {
@@ -23,12 +20,11 @@ public class PetDAO {
             prepStat.executeUpdate();
 
         }catch (Exception e){
-            System.out.println("SQL Error!");
             System.out.println(e);
         }
     }
 
-    public static int generatePetId() {
+    public static int generatePetId() throws SQLException {
         return DBUtil.getNewId("pet");
     }
 }

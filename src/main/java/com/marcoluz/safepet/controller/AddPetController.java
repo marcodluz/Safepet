@@ -32,8 +32,10 @@ public class AddPetController {
     @FXML
     private Label petCoatColourError;
 
+    // Main Variables
     private String mydata[] = new String[5];
 
+    @FXML
     public void createPet(ActionEvent event) throws IOException {
         boolean petNameValidatorChar = DataValidation.charOnly(petName, petNameError, "Only characters");
         boolean petNameValidatorNull = DataValidation.textFieldNull(petName, petNameError, "Enter your pet's name");
@@ -43,28 +45,22 @@ public class AddPetController {
         boolean petCoatColourValidatorChar = DataValidation.charOnly(petCoatColour, petCoatColourError, "Only characters");
         boolean petCoatColourValidatorNull = DataValidation.textFieldNull(petCoatColour, petCoatColourError, "Enter your pet's coat colour");
 
-
-        // Check date if is less than today
-        ///REMEMBER
-
-
         if (petNameValidatorChar && !petNameValidatorNull && petSpecieValidatorChar
                 && !petSpecieValidatorNull && petCoatColourValidatorChar && !petDOBValidatorNull && !petCoatColourValidatorNull)
         {
-                System.out.println("Pet successfully created!");
-
                 mydata[0] = this.petName.getText();
                 mydata[1] = this.petSpecie.getText();
                 mydata[2] = this.petCoatColour.getText();
                 mydata[3] = String.valueOf(this.petDatePicker.getValue());
                 mydata[4] = this.petNotes.getText();
 
-                String insertsql = "INSERT INTO pet (id, account_id, name, specie, coat_colour, dob, notes) values (?, ?, ?, ?, ?, ?, ?);";
-                PetDAO.insertPetDetails(insertsql, mydata);
+                String SQL = "INSERT INTO pet (id, account_id, name, specie, coat_colour, dob, notes) values (?, ?, ?, ?, ?, ?, ?);";
+                PetDAO.insertPetDetails(SQL, mydata);
 
                 AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/pets-page.fxml"));
                 middleRootPane.getChildren().setAll(pane);
 
+                System.out.println("Pet successfully created!");
         }
         else {
             System.out.println("Pet not created!");

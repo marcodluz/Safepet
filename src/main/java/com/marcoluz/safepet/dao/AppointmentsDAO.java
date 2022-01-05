@@ -3,8 +3,8 @@ package com.marcoluz.safepet.dao;
 import com.marcoluz.safepet.controller.AddAppointmentController;
 import com.marcoluz.safepet.controller.MainController;
 import com.marcoluz.safepet.util.DBUtil;
-
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class AppointmentsDAO {
     public static void insertAppointmentDetails(String pStatement, String[] values){
@@ -19,12 +19,11 @@ public class AppointmentsDAO {
             prepStat.executeUpdate();
 
         }catch (Exception e){
-            System.out.println("SQL Error!");
             System.out.println(e);
         }
     }
 
-    public static int generateAppointmentId() {
+    public static int generateAppointmentId() throws SQLException {
         return DBUtil.getNewId("appointment");
     }
 }

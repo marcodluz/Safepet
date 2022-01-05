@@ -4,22 +4,36 @@ import java.sql.*;
 
 public class DBUtil {
 
+    // Variables
     public static Connection db;
     private static final String dbUrl  = "jdbc:postgresql://localhost:5432/postgres";
 
+
+    /////////////////////////////////////////////
+    /////// CHANGE BEFORE USING THE APP /////////
+
+    private static String dbUsername = "postgres";
+    private static String dbPassword = "lol26363";
+
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+
+
     public static boolean getConneted(){
         try {
-            db = DriverManager.getConnection(dbUrl, "postgres", "lol2636");
+            // Check the credentials
+            db = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
             System.out.println("Database connection established successfully!");
             return true;
         }catch (Exception e){
             System.out.println("Database connection failed!");
+            System.out.println("Wrong Database Credentials! Change it on DBUtil.java");
             return false;
         }
     }
 
     public static Connection connect() throws SQLException {
-        return DriverManager.getConnection(dbUrl, "postgres", "lol2636");
+        return DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
     }
 
     public  static void sqlUpdate(String statement){
@@ -39,29 +53,21 @@ public class DBUtil {
 
             return rs;
         }catch (Exception e){
-            System.out.println("SQL Error!");
+            System.out.println(e);
         }
         return null;
 
     }
 
-    public static int getNewId(String table) {
+    public static int getNewId(String table) throws SQLException {
         String SQL = "SELECT id FROM "+ table +" ORDER BY id DESC LIMIT 1";
+        ResultSet rs = DBUtil.sqlExecute(SQL);
 
-        try (Connection conn = connect();
-             PreparedStatement preStat = conn.prepareStatement(SQL))
-        {
-            ResultSet result = preStat.executeQuery();
-
-            if(result.next()) {
-                return (result.getInt("id") + 1);
-            }
-            else {
-                return 0;
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            return -1;
+        if(rs.next()) {
+            return (rs.getInt("id") + 1);
+        }
+        else {
+            return 0;
         }
     }
 }

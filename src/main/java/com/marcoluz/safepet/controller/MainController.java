@@ -12,8 +12,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class MainController {
     @FXML
@@ -35,8 +35,6 @@ public class MainController {
     @FXML
     private Label errorLogin;
     @FXML
-    private TextField customerFirstName;
-    @FXML
     private AnchorPane rootPane;
     @FXML
     private AnchorPane middleRootPane;
@@ -51,22 +49,19 @@ public class MainController {
     @FXML
     private Button btnAccount;
     @FXML
-    private StackPane contentArea;
-    @FXML
-    private Label welcomeMessage;
-    @FXML
     private Button btnAddPet;
+    @FXML
+    private StackPane contentArea;
 
-
-
+    // Main Variables
     public static int id;
     public static String firstName;
     public static String lastName;
     public static String email;
+    private String mydata[] = new String[3];
 
-    private String mydata[] = new String[4];
-
-    public void createAccount(ActionEvent event) throws IOException {
+    @FXML
+    public void createAccount(ActionEvent event) throws IOException, SQLException {
         boolean firstNameValidatorChar = DataValidation.charOnly(customer_firstname, firstNameError, "Only characters");
         boolean firstNameValidatorNull = DataValidation.textFieldNull(customer_firstname, firstNameError, "Enter your first name");
         boolean lastNameValidatorChar = DataValidation.charOnly(customer_lastname, lastNameError, "Only characters");
@@ -76,24 +71,24 @@ public class MainController {
         boolean emailExists = AccountDAO.checkEmailExists(customer_email, emailError, "Email already exists");
         boolean passwordValidatorNull = DataValidation.passwordFieldNull(customer_password, passwordError, "Enter a password");
 
+        // Check if all the data validations are returning TRUE (means that passed the validation)
         if (firstNameValidatorChar && !firstNameValidatorNull && lastNameValidatorChar
                 && !lastNameValidatorNull && emailValidatorFormat && !emailExists
                 && !emailValidatorNull && !passwordValidatorNull)
         {
-
-            System.out.println("Account successfully created!");
-
             mydata[0] = this.customer_firstname.getText();
             mydata[1] = this.customer_lastname.getText();
             mydata[2] = this.customer_email.getText();
-            mydata[3] = this.customer_password.getText();
 
-            String insertsql = "insert into account (id, first_name, last_name, email, password) values (?, ?, ?, ?, ?);";
+            String insertsql = "INSERT INTO account (id, first_name, last_name, email, password) " +
+                    "VALUES (?, ?, ?, ?, crypt('"+ customer_password.getText() +"', gen_salt('bf')));";
+
             AccountDAO.insertAccountDetails(insertsql, mydata);
 
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/signup-success.fxml"));
             rootPane.getChildren().setAll(pane);
 
+            System.out.println("Account successfully created!");
         }
         else {
             System.out.println("Account not created!");
@@ -101,11 +96,15 @@ public class MainController {
     }
 
     @FXML
-    private void login(ActionEvent event) throws IOException {
+    private void login(ActionEvent event) throws IOException, SQLException {
+
+        // Check if the credentials match one account
         if (AccountDAO.checkLoginDetails(customer_email.getText(), customer_password.getText())) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/dashboard.fxml"));
             rootPane.getChildren().setAll(pane);
 
+            // Save the account details to use while logged in
+            // (could have been used another approach, but for a simple application this one is more than fine)
             id = AccountDAO.getId(customer_email.getText(), customer_password.getText());
             firstName = AccountDAO.getFirstName(customer_email.getText(), customer_password.getText());
             lastName = AccountDAO.getLastName(customer_email.getText(), customer_password.getText());
@@ -128,14 +127,16 @@ public class MainController {
         rootPane.getChildren().setAll(pane);
     }
 
+    // Menu selection system
     @FXML
     private void handleClicks(ActionEvent event) throws IOException {
+
+        // Select the page to show by the button fx:id
         if(event.getSource() == btnMyPets) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/pets-page.fxml"));
             contentArea.setBackground(new Background(new BackgroundFill(Color.rgb(63, 43, 99), CornerRadii.EMPTY, Insets.EMPTY)));
             middleRootPane.getChildren().setAll(pane);
         }
-
         else if(event.getSource() == btnMyAppointments) {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/appointments-page.fxml"));
             contentArea.setBackground(new Background(new BackgroundFill(Color.rgb(63, 43, 99), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -158,21 +159,6 @@ public class MainController {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/add-pet-page.fxml"));
             middleRootPane.getChildren().setAll(pane);
         }
-    }
-
-    public void onClearButtonClick(){
-        customer_firstname.setText("");
-        customer_lastname.setText("");
-        customer_email.setText("");
-        customer_password.setText("");
-    }
-
-    public void setCustomerInfo() {
-        customerFirstName.setText(firstName);
-    }
-
-    public void setWelcomeMessage() {
-        welcomeMessage.setText(welcomeMessage.getText() + " " + firstName +"!");
     }
 }
 

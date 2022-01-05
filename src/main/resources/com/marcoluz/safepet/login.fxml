@@ -27,7 +27,7 @@
                         <Insets left="220.0" top="250.0" />
                      </VBox.margin>
                   </ImageView>
-                  <TextField fx:id="customer_email" maxHeight="50.0" maxWidth="400.0" prefHeight="50.0" prefWidth="400.0" text="marcotdl@hotmail.com">
+                  <TextField fx:id="customer_email" maxHeight="50.0" maxWidth="400.0" prefHeight="50.0" prefWidth="400.0">
                      <VBox.margin>
                         <Insets left="70.0" top="5.0" />
                      </VBox.margin>
@@ -46,7 +46,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="customer_password" maxHeight="50.0" maxWidth="400.0" prefHeight="50.0" prefWidth="400.0" text="teste123">
+                  <PasswordField fx:id="customer_password" maxHeight="50.0" maxWidth="400.0" prefHeight="50.0" prefWidth="400.0">
                      <VBox.margin>
                         <Insets left="70.0" />
                      </VBox.margin>

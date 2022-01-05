@@ -17,7 +17,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -60,23 +59,23 @@ public class MedWeiController implements Initializable {
     @FXML
     private TableColumn clm_weight_date;
 
+    // Main Variables
     private String mydata[] = new String[1];
-
     final ObservableList<Pet> petOptions = FXCollections.observableArrayList();
-
     public static int petId1;
     public static int petId2;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            fillPetComboBox();
-            listMedication();
-            listWeight();
+            fillPetComboBox(); // Fill the combo boxes with the user pets
+            listMedication(); // Show medication info in the table
+            listWeight(); // Show weight info in the table
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        // Get the selected pet from the combo box of the medication
         medPet.valueProperty().addListener(new ChangeListener<Pet>() {
             @Override
             public void changed(ObservableValue<? extends Pet> observableValue, Pet pet1, Pet pet2) {
@@ -84,6 +83,7 @@ public class MedWeiController implements Initializable {
             }
         });
 
+        // Get the selected pet from the combo box of the weight
         weightPet.valueProperty().addListener(new ChangeListener<Pet>() {
             @Override
             public void changed(ObservableValue<? extends Pet> observableValue, Pet pet1, Pet pet2) {
@@ -92,14 +92,13 @@ public class MedWeiController implements Initializable {
         });
     }
 
+    // Add a new entry to the medication table
     public void addMedication(ActionEvent event) throws IOException {
         boolean medicationNameNull = DataValidation.textFieldNull(medicationName, medNameError, "Insert a medication name");
         boolean medicationPetNull = DataValidation.comboBoxNull(medPet, medPetError, "You need to select your pet");
 
         if (!medicationNameNull && !medicationPetNull)
         {
-            System.out.println("Medication successfully added!");
-
             mydata[0] = this.medicationName.getText();
 
             String SQL = "INSERT INTO medication (id, account_id, pet_id, med_name, date) values (?, ?, ?, ?, ?);";
@@ -108,12 +107,14 @@ public class MedWeiController implements Initializable {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/health-page.fxml"));
             middleRootPane.getChildren().setAll(pane);
 
+            System.out.println("Medication successfully added!");
         }
         else {
             System.out.println("Medication not added!");
         }
     }
 
+    // Add a new entry to the weight table
     public void addWeight(ActionEvent event) throws IOException {
         boolean weightNull = DataValidation.textFieldNull(weightValue, weightError, "Insert a valid weight");
         boolean weightNumber = DataValidation.numberOnly(weightValue, weightError, "Insert a valid weight");
@@ -121,8 +122,6 @@ public class MedWeiController implements Initializable {
 
         if (!weightNull && !weightPetNull && weightNumber)
         {
-            System.out.println("Weight successfully added!");
-
             mydata[0] = this.weightValue.getText();
 
             String SQL = "INSERT INTO weight (id, account_id, pet_id, weight, date) values (?, ?, ?, ?, ?);";
@@ -131,17 +130,19 @@ public class MedWeiController implements Initializable {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/health-page.fxml"));
             middleRootPane.getChildren().setAll(pane);
 
+            System.out.println("Weight successfully added!");
         }
         else {
             System.out.println("Weight not added!");
         }
     }
 
+    // Fill the combo box with the pets
     public void fillPetComboBox() throws SQLException {
         String SQL = "SELECT * FROM pet WHERE account_id =" + MainController.id + " ORDER BY name ASC";
-
         ResultSet rs = DBUtil.sqlExecute(SQL);
         Pet pet;
+
         while (rs.next()){
             pet = new Pet(rs.getInt("id"), rs.getInt("account_id"),
                     rs.getString("name"),rs.getString("specie"), rs.getString("coat_colour"), rs.getString("dob"),
@@ -156,11 +157,10 @@ public class MedWeiController implements Initializable {
         weightPet.setItems(petOptions);
     }
 
+    // Obtain the medication from the database
     public ObservableList<Medication> getMedicationList() throws SQLException {
         ObservableList<Medication> medicationsObservableList = FXCollections.observableArrayList();
-        String myQuery =
-                "SELECT * FROM medication WHERE (account_id = "+ MainController.id +") ORDER BY id DESC";
-
+        String myQuery = "SELECT * FROM medication WHERE (account_id = "+ MainController.id +") ORDER BY id DESC";
         ResultSet rs = DBUtil.sqlExecute(myQuery);
         Medication medication;
 
@@ -171,19 +171,22 @@ public class MedWeiController implements Initializable {
         return medicationsObservableList;
     }
 
+    // Show the medications in the table
     public void listMedication() throws SQLException {
         ObservableList<Medication> list = getMedicationList();
+
         clm_med_pet_id.setCellValueFactory(new PropertyValueFactory<Medication,Integer>("pet_id"));
         clm_medication.setCellValueFactory(new PropertyValueFactory<Medication,String>("med_name"));
         clm_med_date.setCellValueFactory(new PropertyValueFactory<Medication,String>("date"));
+
+        // Insert the values into the table
         tblMedication.setItems(list);
     }
 
+    // Obtain the weight from the database
     public ObservableList<Weight> getWeightList() throws SQLException {
         ObservableList<Weight> weightsObservableList = FXCollections.observableArrayList();
-        String myQuery =
-                "SELECT * FROM weight WHERE (account_id = "+ MainController.id +") ORDER BY id DESC";
-
+        String myQuery = "SELECT * FROM weight WHERE (account_id = "+ MainController.id +") ORDER BY id DESC";
         ResultSet rs = DBUtil.sqlExecute(myQuery);
         Weight weight;
 
@@ -194,11 +197,15 @@ public class MedWeiController implements Initializable {
         return weightsObservableList;
     }
 
+    // Show the weights in the table
     public void listWeight() throws SQLException {
         ObservableList<Weight> list = getWeightList();
+
         clm_weight_pet_id.setCellValueFactory(new PropertyValueFactory<Weight,Integer>("pet_id"));
         clm_weight.setCellValueFactory(new PropertyValueFactory<Weight,String>("weight"));
         clm_weight_date.setCellValueFactory(new PropertyValueFactory<Weight,String>("date"));
+
+        // Insert the values into the table
         tblWeight.setItems(list);
     }
 }

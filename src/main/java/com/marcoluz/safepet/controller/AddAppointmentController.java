@@ -14,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -40,20 +39,20 @@ public class AddAppointmentController implements Initializable {
     @FXML
     private AnchorPane middleRootPane;
 
+    // Main Variables
     private String mydata[] = new String[2];
-
     public static int petId;
-
     final ObservableList<Pet> petOptions = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            fillPetComboBox();
+            fillPetComboBox(); // Fill the combo boxes with the user pets
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        // Get the selected pet from the combo box
         appointmentPet.valueProperty().addListener(new ChangeListener<Pet>() {
             @Override
             public void changed(ObservableValue<? extends Pet> observableValue, Pet pet1, Pet pet2) {
@@ -62,18 +61,14 @@ public class AddAppointmentController implements Initializable {
         });
     }
 
+    @FXML
     public void createAppointment(ActionEvent event) throws IOException {
         boolean appointmentPetValidatorNull = DataValidation.comboBoxNull(appointmentPet, appointmentPetError, "You need to select one pet");
         boolean appointmentTypeValidatorNull = DataValidation.comboBoxNull(appointmentPet, appointmentTypeError, "You need to select one type");
 
-        // Check date if is less than today
-        ///REMEMBER
-
         if (!appointmentPetValidatorNull && !appointmentTypeValidatorNull
                 && !isDatePast(String.valueOf(appointmentDatePicker.getValue()),  "yyyy-MM-dd"))
         {
-            System.out.println("Appointment successfully created!");
-
             mydata[0] = (String) this.appointmentType.getValue();
             mydata[1] = String.valueOf(this.appointmentDatePicker.getValue());
 
@@ -83,6 +78,7 @@ public class AddAppointmentController implements Initializable {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/marcoluz/safepet/appointments-page.fxml"));
             middleRootPane.getChildren().setAll(pane);
 
+            System.out.println("Appointment successfully created!");
         }
         else {
             System.out.println("Appointment not created!");
@@ -91,9 +87,9 @@ public class AddAppointmentController implements Initializable {
 
     public void fillPetComboBox() throws SQLException {
         String SQL = "SELECT * FROM pet WHERE account_id =" + MainController.id + " ORDER BY name ASC";
-
         ResultSet rs = DBUtil.sqlExecute(SQL);
         Pet pet;
+
         while (rs.next()){
             pet = new Pet(rs.getInt("id"), rs.getInt("account_id"),
                     rs.getString("name"),rs.getString("specie"), rs.getString("coat_colour"), rs.getString("dob"),

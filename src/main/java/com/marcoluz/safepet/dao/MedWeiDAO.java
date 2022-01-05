@@ -1,16 +1,16 @@
 package com.marcoluz.safepet.dao;
 
-import com.marcoluz.safepet.controller.AddAppointmentController;
 import com.marcoluz.safepet.controller.MainController;
 import com.marcoluz.safepet.controller.MedWeiController;
 import com.marcoluz.safepet.util.DBUtil;
-
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
 public class MedWeiDAO {
     public static void insertMedicationDetails(String pStatement, String[] values){
+        // Current date variable
         LocalDate localDate = LocalDate.now(ZoneId.systemDefault());
 
         try{
@@ -22,13 +22,13 @@ public class MedWeiDAO {
             prepStat.setString(5, String.valueOf(localDate));
             prepStat.executeUpdate();
 
-        }catch (Exception e){
-            System.out.println("SQL Error!");
+        } catch (Exception e){
             System.out.println(e);
         }
     }
 
     public static void insertWeightDetails(String pStatement, String[] values){
+        // Current date variable
         LocalDate localDate = LocalDate.now(ZoneId.systemDefault());
 
         try{
@@ -40,17 +40,16 @@ public class MedWeiDAO {
             prepStat.setString(5, String.valueOf(localDate));
             prepStat.executeUpdate();
 
-        }catch (Exception e){
-            System.out.println("SQL Error!");
+        } catch (Exception e){
             System.out.println(e);
         }
     }
 
-    public static int generateMedicationId() {
+    public static int generateMedicationId() throws SQLException {
         return DBUtil.getNewId("medication");
     }
 
-    public static int generateWeightId() {
+    public static int generateWeightId() throws SQLException {
         return DBUtil.getNewId("weight");
     }
 }
