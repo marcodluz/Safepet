@@ -25,9 +25,12 @@ public class DBUtil {
       System.out.println("Database connection established successfully!");
       return true;
     } catch (Exception e) {
-      System.out.println("Database connection failed!");
       System.out.println(
-        "Wrong Database Credentials! Change it on DBUtil.java"
+        "\n-------- Database connection error! --------\n" +
+                "(Follow these steps by Marco Luz) \n " +
+                "- Change your database credentials in /util/DBUtil.java \n " +
+                "- Import the postgresql library \n " +
+                "- Add the postgresql library to the Module Safepet\n\n\n"
       );
       return false;
     }

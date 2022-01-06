@@ -16,6 +16,10 @@ public class Main extends Application {
     //
     // GO TO DBUtil.java AND CHANGE THE POSTGRESQL DATABASE CREDENTIALS ON THE TOP!!!!
     //
+    // DON'T FORGET TO "TRUST PROJECT" SO THE MAVEN JAVAFX IS DOWNLOAD IT AUTOMATICALLY
+    //
+    // IMPORT THE POSTGRESQL EXTERNAL LIBRARY
+    //
     /////////////////////////////////////////////////////////////////////////////////////
 
     launch(args);
