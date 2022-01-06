@@ -12,8 +12,8 @@ public class DBUtil {
   /////////////////////////////////////////////
   /////// CHANGE BEFORE USING THE APP /////////
 
-  private static String dbUsername = "postgres";
-  private static String dbPassword = "lol2636";
+  private static String dbUsername = "postgres"; // YOUR_DB_USERNAME_HERE
+  private static String dbPassword = "lol2636"; // YOUR_DB_PASSWORD_HERE
 
   /////////////////////////////////////////////
   /////////////////////////////////////////////
